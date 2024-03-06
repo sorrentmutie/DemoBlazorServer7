@@ -1,0 +1,20 @@
+﻿
+@inject ICategorie categoriesService
+
+<h3>Lista Categorie</h3>
+
+@foreach (var category in categories)
+{
+   <p>@category.Id @category.Name</p> 
+}
+
+
+@code {
+
+    private List<CategoryDTO> categories = new();
+    protected override async Task OnInitializedAsync()
+    {
+        categories = (await categoriesService.GetCategoriesAsync()).ToList();
+    }
+
+}

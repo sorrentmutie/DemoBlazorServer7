@@ -7,7 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DemoBlazor.Components.Library\DemoBlazor.Components.Library.csproj" />
+    <ProjectReference Include="..\DemoBlazor.Data\DemoBlazor.Data.csproj" />
     <ProjectReference Include="..\DemoBlazor.Models\DemoBlazor.Models.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Shared\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.16" />
   </ItemGroup>
 
 </Project>

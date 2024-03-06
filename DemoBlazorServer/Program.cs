@@ -1,6 +1,8 @@
+using DemoBlazor.Data.Models;
 using DemoBlazor.Models.Interfaces;
 using DemoBlazor.Models.Services;
-using DemoBlazorServer.Data;
+using DemoBlazorServer.Services;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +11,13 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddScoped<IDatiEventi, ServizioDatiEventi>();
+builder.Services.AddDbContext<NorthwindContext>(
+    options =>
+    {
+        options.UseSqlServer(
+            builder.Configuration.GetConnectionString("NorthwindConnection"));
+    });
+builder.Services.AddScoped<ICategorie, ServizioCategorie>();
 
 var app = builder.Build();
 
