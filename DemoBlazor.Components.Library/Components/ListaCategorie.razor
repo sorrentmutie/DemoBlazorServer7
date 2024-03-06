@@ -1,7 +1,7 @@
 ﻿
 @inject ICategorie categoriesService
 
-<h3>Lista Categorie</h3>
+
 
 @foreach (var category in categories)
 {
@@ -11,10 +11,11 @@
 
 @code {
 
-    private List<CategoryDTO> categories = new();
+    private List<CategoryDTO>? categories = new();
     protected override async Task OnInitializedAsync()
     {
-        categories = (await categoriesService.GetCategoriesAsync()).ToList();
+
+        categories = (await categoriesService.GetCategoriesAsync())?.ToList();
     }
 
 }

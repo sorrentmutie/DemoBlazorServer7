@@ -11,13 +11,19 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddScoped<IDatiEventi, ServizioDatiEventi>();
+//builder.Services.AddScoped<HttpClient>();
+
+builder.Services.AddHttpClient();
+
+
+
 builder.Services.AddDbContext<NorthwindContext>(
     options =>
     {
         options.UseSqlServer(
             builder.Configuration.GetConnectionString("NorthwindConnection"));
     });
-builder.Services.AddScoped<ICategorie, ServizioCategorie>();
+builder.Services.AddScoped<ICategorie, ServizioHTTPServer>();
 
 var app = builder.Build();
 

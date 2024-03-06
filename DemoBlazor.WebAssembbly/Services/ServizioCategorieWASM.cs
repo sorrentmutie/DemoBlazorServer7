@@ -1,12 +1,37 @@
 ﻿using DemoBlazor.Models.DTO;
 using DemoBlazor.Models.Interfaces;
+using System.Net.Http.Json;
 
 namespace DemoBlazor.WebAssembbly.Services;
 
 public class ServizioCategorieWASM : ICategorie
 {
-    public Task<IEnumerable<CategoryDTO>> GetCategoriesAsync()
+    private readonly HttpClient httpClient;
+    private readonly IConfiguration configuration;
+
+    public ServizioCategorieWASM(HttpClient httpClient, IConfiguration configuration)
     {
-        throw new NotImplementedException();
+        this.httpClient = httpClient;
+        this.configuration = configuration;
+    }
+
+    public async Task AddCategory(CategoryCreateDTO category)
+    {
+        await httpClient.PostAsJsonAsync(configuration["CategoriesUrl"], category);
+    }
+
+    public async Task<IEnumerable<CategoryDTO>?> GetCategoriesAsync()
+    {
+        var response = await httpClient.GetAsync(configuration["CategoriesUrl"]);
+        if(response.IsSuccessStatusCode)
+        {
+            return await 
+                response.Content.ReadFromJsonAsync<IEnumerable<CategoryDTO>>();
+        } else
+        {
+            return null;
+        }
+
+       
     }
 }

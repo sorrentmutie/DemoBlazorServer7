@@ -1,8 +1,34 @@
 ﻿@page "/categorie"
 
 <h3>Pagina Categorie</h3>
-<ListaCategorie/>
+
+<button class="btn btn-info" @onclick="CreaCategoria">Crea Categoria</button>
+
+@if(categoria == null)
+{
+    <ListaCategorie />
+} else
+{
+    <DettaglioCategoria Category="categoria" CategoryChanged="Changed"/>
+}
+
+
+
+
 
 @code {
+
+    CategoryCreateDTO? categoria;
+
+
+    private void CreaCategoria()
+    {
+        categoria = new CategoryCreateDTO { Name = "Cat103", Description = "desc 103" };
+    }
+
+    private void Changed(CategoryCreateDTO category)
+    {
+        categoria = null;
+    }
 
 }

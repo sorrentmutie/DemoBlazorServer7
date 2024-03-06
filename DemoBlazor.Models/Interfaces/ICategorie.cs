@@ -4,5 +4,6 @@ namespace DemoBlazor.Models.Interfaces;
 
 public  interface ICategorie
 {
-    Task<IEnumerable<CategoryDTO>> GetCategoriesAsync();
+    Task<IEnumerable<CategoryDTO>?> GetCategoriesAsync();
+    Task AddCategory(CategoryCreateDTO category);
 }

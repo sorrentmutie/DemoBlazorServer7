@@ -1,0 +1,16 @@
+﻿<h3>Dettaglio Categoria</h3>
+
+<p>@Category?.Name</p>
+<button class="btn btn-danger" 
+   @onclick="() => CategoryChanged.InvokeAsync(Category)">Torna indietro</button>
+
+
+
+@code {
+    [Parameter] 
+    public CategoryCreateDTO? Category { get; set; } 
+
+    [Parameter]
+    public EventCallback<CategoryCreateDTO> CategoryChanged { get; set; }
+
+}

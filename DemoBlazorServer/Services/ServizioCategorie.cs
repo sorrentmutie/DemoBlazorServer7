@@ -14,7 +14,12 @@ public class ServizioCategorie : ICategorie
         this.northwindContext = northwindContext;
     }
 
-    public async Task<IEnumerable<CategoryDTO>> GetCategoriesAsync()
+    public Task AddCategory(CategoryCreateDTO category)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task<IEnumerable<CategoryDTO>?> GetCategoriesAsync()
     {
         return await northwindContext.Categories
             .Select(c => new CategoryDTO
