@@ -1,5 +1,10 @@
 @import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
+
+h3 {
+  color: red
+}
+
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
