@@ -1,16 +1,29 @@
-﻿<h3>Dettaglio Categoria</h3>
+﻿<h3>@Category?.Name</h3>
+@if(Category != null)
+{
+    <EditForm Model="Category" OnValidSubmit="() => CategoryChanged.InvokeAsync(Category)">
+        <div class="form-group">
+            <label for="nome">Nome</label>
+            <InputText id="nome" @bind-Value="Category.Name" class="form-control" />
+        </div>
 
-<p>@Category?.Name</p>
-<button class="btn btn-danger" 
-   @onclick="() => CategoryChanged.InvokeAsync(Category)">Torna indietro</button>
+        <div class="form-group">
+            <label for="descrizione">Descrizione</label>
+            <InputText id="descrizione" @bind-Value="Category.Description" class="form-control" />
+        </div>
 
+        <div style="margin-top:15px">
+            <button type="submit" class="btn btn-info">OK</button>
+            <button type="button" @onclick="() => CategoryChanged.InvokeAsync(null)" class="btn btn-danger">Annulla </button>
+        </div>
+    </EditForm>
+}
 
 
 @code {
     [Parameter] 
-    public CategoryCreateDTO? Category { get; set; } 
+    public CategoryDTO? Category { get; set; } 
 
     [Parameter]
-    public EventCallback<CategoryCreateDTO> CategoryChanged { get; set; }
-
+    public EventCallback<CategoryDTO> CategoryChanged { get; set; } 
 }

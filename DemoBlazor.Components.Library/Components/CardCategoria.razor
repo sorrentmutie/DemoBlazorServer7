@@ -1,0 +1,16 @@
+﻿
+@if(Category is not null)
+{
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">@Category.Name</h5>
+            <p class="card-text">@Category.Description</p>
+            <button @onclick="() => OnCategorySelected.InvokeAsync(Category)" class="btn btn-primary">Go somewhere</button>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter] public CategoryDTO? Category { get; set; }
+    [Parameter] public EventCallback<CategoryDTO> OnCategorySelected { get; set; }
+}

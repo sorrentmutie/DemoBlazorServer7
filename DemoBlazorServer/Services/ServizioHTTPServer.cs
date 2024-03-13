@@ -35,4 +35,9 @@ public class ServizioHTTPServer : ICategorie
 
 
     }
+
+    public Task UpdateCategory(CategoryDTO category)
+    {
+        throw new NotImplementedException();
+    }
 }

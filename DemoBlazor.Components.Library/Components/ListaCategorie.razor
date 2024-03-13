@@ -1,21 +1,19 @@
 ﻿
-@inject ICategorie categoriesService
 
-
-
-@foreach (var category in categories)
+@if(Categories != null)
 {
-   <p>@category.Id @category.Name</p> 
+    @foreach (var category in Categories)
+    {
+       <CardCategoria Category="category" OnCategorySelected="CategorySelected"></CardCategoria>
+    }
 }
 
-
 @code {
-
-    private List<CategoryDTO>? categories = new();
-    protected override async Task OnInitializedAsync()
+    [Parameter] public List<CategoryDTO>? Categories { get; set; }
+    [Parameter] public EventCallback<CategoryDTO> OnCategorySelected { get; set; }
+    
+    private void CategorySelected(CategoryDTO category)
     {
-
-        categories = (await categoriesService.GetCategoriesAsync())?.ToList();
+        OnCategorySelected.InvokeAsync(category);
     }
-
 }

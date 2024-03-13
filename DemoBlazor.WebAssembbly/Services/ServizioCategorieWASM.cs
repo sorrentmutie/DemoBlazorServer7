@@ -34,4 +34,10 @@ public class ServizioCategorieWASM : ICategorie
 
        
     }
+
+    public async Task UpdateCategory(CategoryDTO category)
+    {
+       await httpClient.PutAsJsonAsync
+            ($"{configuration["CategoriesUrl"]}/{category.Id}", category);
+    }
 }

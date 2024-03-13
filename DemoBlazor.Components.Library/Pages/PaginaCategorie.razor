@@ -1,12 +1,13 @@
 ﻿@page "/categorie"
+@inject ICategorie categoriesService
 
-<h3>Pagina Categorie</h3>
-
-<button class="btn btn-info" @onclick="CreaCategoria">Crea Categoria</button>
 
 @if(categoria == null)
 {
-    <ListaCategorie />
+    <h3>Pagina Categorie</h3>
+
+    <button class="btn btn-info" @onclick="CreaCategoria">Crea Categoria</button>
+    <ListaCategorie Categories="categories" OnCategorySelected="CategorySelected" />
 } else
 {
     <DettaglioCategoria Category="categoria" CategoryChanged="Changed"/>
@@ -18,16 +19,46 @@
 
 @code {
 
-    CategoryCreateDTO? categoria;
+    CategoryDTO? categoria;
+    private List<CategoryDTO>? categories = new();  
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        categories = (await categoriesService.GetCategoriesAsync())?.ToList();
+    }
+
+    private void CategorySelected(CategoryDTO categoriaSelezionata)
+    {
+        categoria = categoriaSelezionata;
+    }
 
 
     private void CreaCategoria()
     {
-        categoria = new CategoryCreateDTO { Name = "Cat103", Description = "desc 103" };
+        categoria = new CategoryDTO { Name = "", Description = "" };
     }
 
-    private void Changed(CategoryCreateDTO category)
+    private async Task Changed(CategoryDTO category)
     {
+        // Id == 0 means that the category is new
+        // Id != 0 means that the category is being edited
+        if(category == null)
+        {
+            categoria = null;
+            return;
+        }
+
+        if(category.Id == 0)
+        {
+            await categoriesService.AddCategory(
+                 new CategoryCreateDTO {  Description = category.Description,
+                                           Name = category.Name});
+        } else
+        {
+            await categoriesService.UpdateCategory(category);
+        }
+        categories = (await categoriesService.GetCategoriesAsync())?.ToList();
         categoria = null;
     }
 

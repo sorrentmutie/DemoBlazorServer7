@@ -7,13 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoBlazorServer", "DemoBla
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoBlazor.Models", "DemoBlazor.Models\DemoBlazor.Models.csproj", "{E293CE7D-F0CD-4949-8DF8-D355534D5A90}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoBlazor.Components.Library", "DemoBlazor.Components.Library\DemoBlazor.Components.Library.csproj", "{01722801-EE51-4359-8162-941B813D56A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoBlazor.Components.Library", "DemoBlazor.Components.Library\DemoBlazor.Components.Library.csproj", "{01722801-EE51-4359-8162-941B813D56A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoBlazor.WebAssembbly", "DemoBlazor.WebAssembbly\DemoBlazor.WebAssembbly.csproj", "{3468F130-FBD7-4C33-B336-3D36E2C67986}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoBlazor.WebAssembbly", "DemoBlazor.WebAssembbly\DemoBlazor.WebAssembbly.csproj", "{3468F130-FBD7-4C33-B336-3D36E2C67986}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoBlazor.Data", "DemoBlazor.Data\DemoBlazor.Data.csproj", "{B9B8A773-0FEE-4CD7-A032-78A5323BCC4E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoBlazor.Data", "DemoBlazor.Data\DemoBlazor.Data.csproj", "{B9B8A773-0FEE-4CD7-A032-78A5323BCC4E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoBlazor.API", "DemoBlazor.API\DemoBlazor.API.csproj", "{1DE35192-7F45-4D8C-BDB8-1856550A869A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoBlazor.API", "DemoBlazor.API\DemoBlazor.API.csproj", "{1DE35192-7F45-4D8C-BDB8-1856550A869A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

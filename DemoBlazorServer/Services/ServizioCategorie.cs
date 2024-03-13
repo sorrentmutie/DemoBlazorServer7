@@ -30,4 +30,9 @@ public class ServizioCategorie : ICategorie
             })
             .ToListAsync();
     }
+
+    public Task UpdateCategory(CategoryDTO category)
+    {
+        throw new NotImplementedException();
+    }
 }

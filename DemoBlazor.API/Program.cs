@@ -57,6 +57,23 @@ categories.MapPost("/", async (NorthwindContext context, CategoryCreateDTO categ
     return Results.Created($"/categories/{newCategory.CategoryId}", newCategory);
 });
 
+categories.MapPut("/{id}", 
+    async (NorthwindContext context, int id, CategoryDTO updatedCategory) =>
+{
+    if(id != updatedCategory.Id)
+    {
+        return Results.BadRequest("Resource id does not match the body");
+    }   
+    var category = await context.Categories.FindAsync(id);
+    if(category == null)
+    {
+        return Results.NotFound();
+    }
+    category.CategoryName = updatedCategory.Name;
+    category.Description = updatedCategory.Description;
+    await context.SaveChangesAsync();
+    return Results.NoContent();
+});
 
 
 
@@ -71,6 +88,7 @@ async Task<IResult> GetCategories(NorthwindContext database)
                  Name = c.CategoryName,
                  Description = c.Description
              })
+             .OrderBy(c => c.Name)
              .ToListAsync();
     return Results.Ok(categories);
 }
