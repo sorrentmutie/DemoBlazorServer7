@@ -1,9 +1,14 @@
-﻿namespace DemoBlazor.Models.DTO;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace DemoBlazor.Models.DTO;
 
 public class CategoryDTO
 {
     public int Id { get; set; }
-    public string? Name { get; set; }
+    [Required(ErrorMessage = "Il nome è obbligatorio")]
+    [StringLength(15, ErrorMessage = "Il nome non può superare 15 caratteri")]
+    public string? Name { get; set; } 
+    [Required(ErrorMessage ="La descrizione è obbligatorio")]
     public string? Description { get; set; }
 }
 

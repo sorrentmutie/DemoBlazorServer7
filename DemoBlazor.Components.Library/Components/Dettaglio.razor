@@ -1,0 +1,34 @@
+﻿@typeparam TItem
+
+
+@if (Item != null)
+{
+    <EditForm Model="Item" OnValidSubmit="() => ItemChanged.InvokeAsync(Item)">
+        <DataAnnotationsValidator />
+
+        @if (FormFields != null)
+        {
+            @FormFields
+        }
+
+
+        <div style="margin-top:15px">
+            <button type="submit" class="btn btn-info">OK</button>
+            <button type="button" @onclick="() => OnCancel.InvokeAsync()" class="btn btn-danger">Annulla </button>
+        </div>
+    </EditForm>
+}
+
+
+@code {
+    [Parameter]
+    public TItem? Item { get; set; }
+
+    [Parameter]
+    public EventCallback<TItem?> ItemChanged { get; set; }
+
+    [Parameter]
+    public EventCallback OnCancel { get; set; }
+
+    [Parameter] public RenderFragment? FormFields { get; set; }
+}

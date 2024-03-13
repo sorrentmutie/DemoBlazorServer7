@@ -10,7 +10,13 @@
     <ListaCategorie Categories="categories" OnCategorySelected="CategorySelected" />
 } else
 {
-    <DettaglioCategoria Category="categoria" CategoryChanged="Changed"/>
+     <Dettaglio TItem="CategoryDTO" Item="categoria" ItemChanged="Changed" OnCancel="Cancel">
+        <FormFields>
+            <TextBox Id="Nome" Label="Nome" @bind-Value="categoria.Name"></TextBox>
+            <TextBox Id="Desc" Label="Descrizione" @bind-Value="categoria.Description"></TextBox>
+        </FormFields>
+
+     </Dettaglio>
 }
 
 
@@ -21,6 +27,13 @@
 
     CategoryDTO? categoria;
     private List<CategoryDTO>? categories = new();  
+
+    private void Cancel()
+    {
+        categoria = null;
+    }
+
+
 
     protected override async Task OnInitializedAsync()
     {

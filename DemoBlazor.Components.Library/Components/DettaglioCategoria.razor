@@ -2,16 +2,14 @@
 @if(Category != null)
 {
     <EditForm Model="Category" OnValidSubmit="() => CategoryChanged.InvokeAsync(Category)">
-        <div class="form-group">
-            <label for="nome">Nome</label>
-            <InputText id="nome" @bind-Value="Category.Name" class="form-control" />
-        </div>
+        <DataAnnotationsValidator />
 
-        <div class="form-group">
-            <label for="descrizione">Descrizione</label>
-            <InputText id="descrizione" @bind-Value="Category.Description" class="form-control" />
-        </div>
+        @if (FormFields != null)
+        {
+            @FormFields
+        }
 
+        
         <div style="margin-top:15px">
             <button type="submit" class="btn btn-info">OK</button>
             <button type="button" @onclick="() => CategoryChanged.InvokeAsync(null)" class="btn btn-danger">Annulla </button>
@@ -26,4 +24,6 @@
 
     [Parameter]
     public EventCallback<CategoryDTO> CategoryChanged { get; set; } 
+
+    [Parameter] public RenderFragment? FormFields { get; set; }
 }
