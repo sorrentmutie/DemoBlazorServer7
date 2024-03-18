@@ -26,6 +26,7 @@ else
                     <td>@evento.Data.ToShortDateString()</td>
                     <td>@evento.Località</td>
                     <td>
+                        <button @onclick="() => OnModificaEvento.InvokeAsync(evento)" class="btn btn-primary">Modifica</button>
                         <button @onclick="() => OnRimuoviEvento.InvokeAsync(evento)" class="btn btn-primary">Rimuovi</button>
                     </td>
                 </tr>
@@ -41,6 +42,8 @@ else
     public List<Evento> Eventi { get; set; } = new();
     [Parameter] 
     public string Titolo { get; set; } = "Lista Eventi";
+    [Parameter]
+    public EventCallback<Evento> OnModificaEvento { get; set; }
     [Parameter]
     public EventCallback<Evento> OnRimuoviEvento { get; set; }
 
