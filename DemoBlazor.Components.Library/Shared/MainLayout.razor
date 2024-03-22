@@ -13,7 +13,19 @@
         </div>
 
         <article class="content px-4">
-            @Body
+                 <CascadingValue Value="TemaApplicazione">
+                     @Body
+                 </CascadingValue>
         </article>
     </main>
 </div>
+
+@code {
+
+
+    [CascadingParameter]
+    public Tema? TemaApplicazione { get; set; }
+          = new() { ClasseBottone = "btn btn-danger" };
+
+}
+

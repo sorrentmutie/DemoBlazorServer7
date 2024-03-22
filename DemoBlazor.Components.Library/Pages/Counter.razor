@@ -1,18 +1,35 @@
 ﻿@page "/counter"
+@inject AppState appState
 
 <PageTitle>Counter</PageTitle>
 
 <h1>Counter</h1>
 
+@if(EventoSpeciale != null)
+{
+    <p>Evento Speciale: @EventoSpeciale.Nome</p>
+}
+@EventoSuperSpeciale?.Nome
+
+
 <p role="status">Current count: @currentCount</p>
 
-<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+<button class="@TemaApplicazione?.ClasseBottone" @onclick="IncrementCount">Click me</button>
 
 @code {
+
+
+    [CascadingParameter] public Tema? TemaApplicazione { get; set; }
+
+    [CascadingParameter] public Evento? EventoSpeciale { get; set; }
+
+    [CascadingParameter(Name ="Alpha")] public Evento? EventoSuperSpeciale { get; set; }
+
     private int currentCount = 0;
 
     private void IncrementCount()
     {
         currentCount++;
+        appState.SetSelectedNumber(currentCount);
     }
 }
