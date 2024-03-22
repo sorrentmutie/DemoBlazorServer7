@@ -1,12 +1,45 @@
-﻿<Router AppAssembly="@typeof(App).Assembly">
-    <Found Context="routeData">
-        <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
-        <FocusOnNavigate RouteData="@routeData" Selector="h1" />
-    </Found>
-    <NotFound>
-        <PageTitle>Not found</PageTitle>
-        <LayoutView Layout="@typeof(MainLayout)">
-            <p role="alert">Sorry, there's nothing at this address.</p>
-        </LayoutView>
-    </NotFound>
-</Router>
+﻿<CascadingValue Value="@EventoSpeciale">
+    <CascadingValue Name="Alpha" Value="@EventoSuperSpeciale">
+        <Router AppAssembly="@typeof(App).Assembly">
+            <Found Context="routeData">
+                <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
+                <FocusOnNavigate RouteData="@routeData" Selector="h1" />
+            </Found>
+            <NotFound>
+                <PageTitle>Not found</PageTitle>
+                <LayoutView Layout="@typeof(MainLayout)">
+                    <p role="alert">Sorry, there's nothing at this address.</p>
+                </LayoutView>
+            </NotFound>
+        </Router>
+   </CascadingValue>
+</CascadingValue>
+
+
+
+
+@code {
+    [CascadingParameter] public Evento? EventoSpeciale { get; set; }
+    [CascadingParameter(Name = "Alpha")] public Evento? EventoSuperSpeciale { get; set; }
+
+    protected override void OnInitialized()
+    {
+        EventoSpeciale = new Evento
+            {
+
+                Id = 1,
+                Località = "Roma",
+                Nome = "Evento Speciale",
+                Data = DateTime.Today
+            };
+
+        EventoSuperSpeciale = new Evento
+            {
+
+                Id = 2,
+                Località = "Roma",
+                Nome = "Evento SuperSpeciale",
+                Data = DateTime.Today
+            };
+    }
+}

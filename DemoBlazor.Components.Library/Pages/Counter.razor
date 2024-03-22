@@ -1,5 +1,6 @@
 ﻿@page "/counter"
 @inject AppState appState
+@inject IJSRuntime JSRuntime
 
 <PageTitle>Counter</PageTitle>
 
@@ -16,7 +17,23 @@
 
 <button class="@TemaApplicazione?.ClasseBottone" @onclick="IncrementCount">Click me</button>
 
+@sum
+
+
 @code {
+
+    [JSInvokable]
+    public static string MetodoDotNet()
+    {
+        return " something";
+    }
+
+    [JSInvokable]
+    public static Task<int[]> RestituisciArrayAsync()
+    {
+        return Task.FromResult(new int[] { 1, 2, 3 });
+    }
+
 
 
     [CascadingParameter] public Tema? TemaApplicazione { get; set; }
@@ -26,10 +43,23 @@
     [CascadingParameter(Name ="Alpha")] public Evento? EventoSuperSpeciale { get; set; }
 
     private int currentCount = 0;
+    private int sum = 0;
 
-    private void IncrementCount()
+    private IndexJavascriptInterop? myInterop;
+
+    protected override void OnInitialized()
+    {
+        myInterop = new IndexJavascriptInterop(JSRuntime);
+    }
+
+
+    private async Task IncrementCount()
     {
         currentCount++;
         appState.SetSelectedNumber(currentCount);
+        // await JSRuntime.InvokeVoidAsync("helloWorld");
+        sum = await myInterop!.Sum(2, 3);
+        sum = await myInterop!.Square(sum);
+        await myInterop.DoSomething();
     }
 }

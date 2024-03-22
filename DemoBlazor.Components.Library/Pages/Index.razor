@@ -1,5 +1,6 @@
 ﻿@page "/"
 @inject IDatiEventi datiEventi
+@inject IJSRuntime JSRuntime
 
 <h1>Hello, world!</h1>
 <Welcome />
@@ -8,14 +9,34 @@
              Titolo="Prossimi eventi"></ListaEventi>
 <hr/>
 
+<Modal Id="myModal" Title="Modale super importante" OnSave="Save">
+    <ChildContent>
+        <p>Questo è il contenuto della modale</p>
+    </ChildContent>
+</Modal>
+
+<button @onclick="ApriModale">Apri Modale</button>
 
 
 @code {
     private List<Evento> eventiFuturi = new();
+    private HelloInterop? helloInterop;
 
-    protected override void OnInitialized()
+    private void ApriModale()
+    {
+        JSRuntime.InvokeVoidAsync("showModal", "myModal");
+    }
+
+    private void Save()
+    {
+        
+    }
+
+    protected override async Task OnInitializedAsync()
     {
         eventiFuturi = datiEventi.EstraiEventiFuturi();  
+        helloInterop = new HelloInterop(JSRuntime);
+        await helloInterop.CallSayHello("Mario Rossi");
     }
 
     private void RimuoviEvento(Evento eventoDaEliminare)
