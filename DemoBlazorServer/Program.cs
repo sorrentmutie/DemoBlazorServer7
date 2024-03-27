@@ -1,4 +1,5 @@
 using DemoBlazor.Data.Models;
+using DemoBlazor.Models;
 using DemoBlazor.Models.Interfaces;
 using DemoBlazor.Models.Services;
 using DemoBlazorServer.Services;
@@ -12,6 +13,7 @@ builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddScoped<IDatiEventi, ServizioDatiEventi>();
 //builder.Services.AddScoped<HttpClient>();
+builder.Services.AddScoped<AppState>();
 
 builder.Services.AddHttpClient();
 

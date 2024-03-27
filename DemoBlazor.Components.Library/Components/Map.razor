@@ -1,5 +1,23 @@
-﻿<div id="map"></div>
+﻿@inject IJSRuntime JSRuntime
+
+
+<div id="@MapSettings.Id" style="height: @(MapSettings.Height)px;"></div>
+
 
 @code {
+    [Parameter] public MapSettings MapSettings { get; set; } = new();
+    private MapJsInterop? MyMapJsInterop;
 
+    protected override void OnInitialized()
+    {
+        MyMapJsInterop = new MapJsInterop(JSRuntime);
+
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+            if (MyMapJsInterop != null)
+                await MyMapJsInterop.ShowMap(MapSettings);
+    }
 }

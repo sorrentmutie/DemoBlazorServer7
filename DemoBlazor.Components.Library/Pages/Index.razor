@@ -4,10 +4,10 @@
 
 <h1>Hello, world!</h1>
 <Welcome />
-<ListaEventi Eventi="eventiFuturi" 
-             OnRimuoviEvento="RimuoviEvento" 
+<ListaEventi Eventi="eventiFuturi"
+             OnRimuoviEvento="RimuoviEvento"
              Titolo="Prossimi eventi"></ListaEventi>
-<hr/>
+<hr />
 
 <Modal Id="myModal" Title="Modale super importante" OnSave="Save">
     <ChildContent>
@@ -17,19 +17,41 @@
 
 <button @onclick="ApriModale">Apri Modale</button>
 <button @onclick="ApriMappa">Apri Mappa</button>
-<hr/>
+<hr />
 <div style="margin-top:50px">
-    <Map />
+    <Map MapSettings="mySettings" />
 </div>
-
+<div style="margin-top:50px">
+    <Map MapSettings="mySettings2" />
+</div>
+<Component1></Component1>
 
 @code {
     private List<Evento> eventiFuturi = new();
     private HelloInterop? helloInterop;
+    private ModalJsInterop? modalInterop;
 
-    private void ApriModale()
+    private MapSettings mySettings = new MapSettings
+        {
+            Latitudine = 45.464664,
+            Longitudine = 9.188540,
+            Zoom = 15,
+            Id = "map",
+            Height = 350
+        };
+    private MapSettings mySettings2 = new MapSettings
+        {
+            Latitudine = 15.464664,
+            Longitudine = 29.188540,
+            Zoom = 15,
+            Id = "map2",
+            Height = 150
+        };
+
+    private async Task ApriModale()
     {
-        JSRuntime.InvokeVoidAsync("showModal", "myModal");
+        modalInterop = new ModalJsInterop(JSRuntime);
+        await modalInterop.ShowModal("myModal");
     }
 
     private void Save()
@@ -39,21 +61,22 @@
 
     private void ApriMappa()
     {
-        var mySettings = new MapSettings
-            {
-                Latitudine = 45.464664,
-                Longitudine = 9.188540,
-                Zoom = 15,
-                Id = "map"
-            };
-        JSRuntime.InvokeVoidAsync("showMap", mySettings);
+        // JSRuntime.InvokeVoidAsync("showMap", mySettings);
     }
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
-        eventiFuturi = datiEventi.EstraiEventiFuturi();  
-        helloInterop = new HelloInterop(JSRuntime);
-        await helloInterop.CallSayHello("Mario Rossi");
+        eventiFuturi = datiEventi.EstraiEventiFuturi();
+
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            helloInterop = new HelloInterop(JSRuntime);
+            await helloInterop.CallSayHello("Mario Rossi");
+        }
     }
 
     private void RimuoviEvento(Evento eventoDaEliminare)

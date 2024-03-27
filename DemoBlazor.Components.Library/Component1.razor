@@ -1,3 +1,24 @@
-﻿<div class="my-component">
+﻿@inject IJSRuntime JSRuntime
+
+<div class="my-component">
+    <button @onclick="ShowPrompt">Show Prompt</button>
     This component is defined in the <strong>DemoBlazor.Components.Library</strong> library.
 </div>
+
+@code
+{
+    private ExampleJsInterop? MyExampleJsInterop;
+
+    protected override Task OnInitializedAsync()
+    {
+        MyExampleJsInterop = new ExampleJsInterop(JSRuntime);
+
+        return base.OnInitializedAsync();
+    }
+
+    private async Task ShowPrompt()
+    {
+        if (MyExampleJsInterop != null)
+            await MyExampleJsInterop.Prompt("Ciao ti stiamo provando");
+    }
+}

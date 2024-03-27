@@ -1,10 +1,10 @@
-﻿window.helloWorld = () => { console.log("Hello") };
+﻿export function helloWorld()  { console.log("Hello") };
 
-window.sum = (a, b) => { return a + b; };
+export function sum(a, b)  { return a + b; };
 
-window.square = (a) => { return a * a; };
+export function square(a)  { return a * a; };
 
-window.doSomething = () => {
+export function doSomething()  {
     var myString = DotNet.invokeMethod('DemoBlazor.Components.Library', 'MetodoDotNet');
     console.log(myString);
 
@@ -14,7 +14,7 @@ window.doSomething = () => {
 }
 
 
-window.sayHello = (dotnetHelper) => {
+export function sayHello(dotnetHelper)  {
     dotnetHelper.invokeMethodAsync('SayHello')
         .then(message => { console.log(message) });
 }

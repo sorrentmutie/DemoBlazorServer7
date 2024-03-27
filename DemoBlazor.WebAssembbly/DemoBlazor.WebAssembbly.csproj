@@ -16,4 +16,8 @@
     <ProjectReference Include="..\DemoBlazor.Models\DemoBlazor.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\js\" />
+  </ItemGroup>
+
 </Project>

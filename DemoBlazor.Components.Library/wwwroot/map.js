@@ -1,4 +1,6 @@
-﻿window.showMap = (mapSettings) => {
+﻿import 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+export function showMap(mapSettings)
+{
     console.log(mapSettings);
     var map = L.map(mapSettings.id).setView([mapSettings.latitudine, mapSettings.longitudine], mapSettings.zoom);
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -12,4 +14,4 @@
         fillOpacity: 0.5,
         radius: 100
     }).addTo(map);
-};
+}

@@ -6,4 +6,5 @@ public class MapSettings
     public double Latitudine { get; set; }
     public double Longitudine { get; set; }
     public int Zoom { get; set; }
+    public int Height { get; set; }
 }
