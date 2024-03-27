@@ -16,6 +16,11 @@
 </Modal>
 
 <button @onclick="ApriModale">Apri Modale</button>
+<button @onclick="ApriMappa">Apri Mappa</button>
+<hr/>
+<div style="margin-top:10px">
+    <Map />
+</div>
 
 
 @code {
@@ -29,7 +34,19 @@
 
     private void Save()
     {
-        
+
+    }
+
+    private void ApriMappa()
+    {
+        var mySettings = new MapSettings
+            {
+                Latitudine = 45.464664,
+                Longitudine = 9.188540,
+                Zoom = 15,
+                Id = "map"
+            };
+        JSRuntime.InvokeVoidAsync("showMap", mySettings);
     }
 
     protected override async Task OnInitializedAsync()
